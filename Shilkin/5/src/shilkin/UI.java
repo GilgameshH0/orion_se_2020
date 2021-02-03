@@ -1,5 +1,9 @@
 package shilkin;
 
+import shilkin.element.Rectangle;
+import shilkin.exception.ElementsOverlapException;
+import shilkin.exception.OutOfSceneException;
+
 public class UI {
 
     private Rectangle[] elements;
@@ -17,10 +21,10 @@ public class UI {
         }
 
         if (getOutScene(rectangle)) {
-            throw new OutOfSceneException("Элемент " + rectangle.caption + " не может быть добавлен, т.к. выходит за границы сцены");
+            throw new OutOfSceneException("Элемент " + rectangle.getCaption() + " не может быть добавлен, т.к. выходит за границы сцены");
         }
         if (getIntersection(rectangle).isIntersect()) {
-            throw new ElementsOverlapException("Элемент " + rectangle.caption + " не может быть добавлен, т.к. пересекается с элементом " + getIntersection(rectangle).getElement());
+            throw new ElementsOverlapException("Элемент " + rectangle.getCaption() + " не может быть добавлен, т.к. пересекается с элементом " + getIntersection(rectangle).getElement());
         }
 
         Rectangle[] temporaryArray = new Rectangle[this.elements.length + 1];
@@ -32,9 +36,9 @@ public class UI {
     private InterCheckResult getIntersection(Rectangle rectangle) {
         InterCheckResult checkResult = new InterCheckResult();
         for (Rectangle element : this.elements) {
-            if ((rectangle.x < element.x + element.width) && (rectangle.x + rectangle.width > element.x)
-                    && (rectangle.y < element.y + element.height) && (rectangle.y + rectangle.height > element.y)) {
-                checkResult.setElement(element.caption);
+            if ((rectangle.getX() < element.getX() + element.getWidth()) && (rectangle.getX() + rectangle.getWidth() > element.getX())
+                    && (rectangle.getY() < element.getY() + element.getHeight()) && (rectangle.getY() + rectangle.getHeight() > element.getY())) {
+                checkResult.setElement(element.getCaption());
                 checkResult.setIntersect(true);
                 break;
             }
@@ -45,6 +49,6 @@ public class UI {
     boolean getOutScene(Rectangle rectangle){
         int maxX = 100;
         int maxY = 100;
-        return (rectangle.x + rectangle.width > maxX) || (rectangle.x + rectangle.height > maxY);
+        return (rectangle.getX() + rectangle.getWidth() > maxX) || (rectangle.getX() + rectangle.getHeight() > maxY);
     }
 }

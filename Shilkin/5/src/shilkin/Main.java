@@ -1,5 +1,13 @@
 package shilkin;
 
+import shilkin.element.CheckBox;
+import shilkin.element.Rectangle;
+import shilkin.element.TextField;
+import shilkin.element.Button;
+import shilkin.exception.ElementsOverlapException;
+import shilkin.exception.OutOfSceneException;
+import shilkin.exception.ReadOnlyException;
+
 import java.util.Random;
 
 public class Main {
@@ -11,12 +19,33 @@ public class Main {
         TextField textY = new TextField(12, 20, 2, 4, "Координата y для нового элемента", true, String.valueOf(getRandomRange(0, 100)));
 
         Button button = new Button(5, 5, 3, 4, "Добавить элемент", true, rectangle -> {
-            int element = random.nextInt(3);
+            int typeCount = 3;
+            int element = random.nextInt(typeCount);
             try {
                 switch (element) {
-                    case 0 -> scene.addElement(new Button(Integer.parseInt(textX.getInputText()), Integer.parseInt(textY.getInputText()), getRandomRange(1, 10), getRandomRange(1, 10), "Кнопка в координатах " + textX.getInputText() + "," + textY.getInputText(), true, newRectangle -> System.out.println("Нажата кнопка в координатах " + textX.getInputText() + "," + textY.getInputText())));
-                    case 1 -> scene.addElement(new CheckBox(Integer.parseInt(textX.getInputText()), Integer.parseInt(textY.getInputText()), getRandomRange(1, 10), getRandomRange(1, 10), "Кнопка в координатах " + textX.getInputText() + "," + textY.getInputText(), true, random.nextBoolean()));
-                    case 2 -> scene.addElement(new TextField(Integer.parseInt(textX.getInputText()), Integer.parseInt(textY.getInputText()), getRandomRange(1, 10), getRandomRange(1, 10), "Кнопка в координатах " + textX.getInputText() + "," + textY.getInputText(), true, getRandomString()));
+                    case 0 -> scene.addElement(
+                            new Button(Integer.parseInt(textX.getInputText()), Integer.parseInt(textY.getInputText()),
+                                    getRandomRange(1, 10),
+                                    getRandomRange(1, 10),
+                                    "Кнопка в координатах " + textX.getInputText() + "," + textY.getInputText(),
+                                    true,
+                                    newRectangle -> System.out.println("Нажата кнопка в координатах " + textX.getInputText() + "," + textY.getInputText())));
+                    case 1 -> scene.addElement(
+                            new CheckBox(Integer.parseInt(textX.getInputText()),
+                                    Integer.parseInt(textY.getInputText()),
+                                    getRandomRange(1, 10),
+                                    getRandomRange(1, 10),
+                                    "Кнопка в координатах " + textX.getInputText() + "," + textY.getInputText(),
+                                    true,
+                                    random.nextBoolean()));
+                    case 2 -> scene.addElement(
+                            new TextField(Integer.parseInt(textX.getInputText()),
+                                    Integer.parseInt(textY.getInputText()),
+                                    getRandomRange(1, 10),
+                                    getRandomRange(1, 10),
+                                    "Кнопка в координатах " + textX.getInputText() + "," + textY.getInputText(),
+                                    true,
+                                    getRandomString()));
                 }
             } catch (ElementsOverlapException | OutOfSceneException e) {
                 System.out.println(e.getMessage());

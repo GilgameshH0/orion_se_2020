@@ -37,9 +37,6 @@ public class Main {
             sites.add(site);
         }
         service.shutdown();
-        while (!service.isTerminated()) {
-            service.awaitTermination(1, TimeUnit.SECONDS);
-        }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             for (Future<String> site : sites) {
                 writer.write(site.get() + "\n");

@@ -1,4 +1,6 @@
-package shilkin;
+package shilkin.element;
+
+import shilkin.exception.ReadOnlyException;
 
 public class Button extends Rectangle implements Clickable {
     private final ButtonClickCallback callback;

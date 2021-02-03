@@ -1,4 +1,6 @@
-package shilkin;
+package shilkin.element;
+
+import shilkin.exception.ReadOnlyException;
 
 public class Rectangle implements Clickable {
     protected final int x;
@@ -20,6 +22,30 @@ public class Rectangle implements Clickable {
     @Override
     public void click() throws ReadOnlyException {
 
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
     }
 }
 

@@ -15,18 +15,28 @@ public class Utils {
         StringBuilder output = new StringBuilder();
         final Class<?> myClass = object.getClass();
         String typeName = getTypeName(myClass);
-        output.append("<").append(typeName).append(">\n");
+        output
+                .append("<")
+                .append(typeName)
+                .append(">\n");
         for (Field declaredField : myClass.getDeclaredFields()) {
             if (declaredField.isAnnotationPresent(XmlIgnore.class)) {
                 continue;
             }
             declaredField.setAccessible(true);
             String fieldName = getFieldName(declaredField);
-            output.append("<").append(fieldName).append(">")
-                    .append(declaredField.get(object).toString()).append("</")
+            output
+                    .append("<")
+                    .append(fieldName)
+                    .append(">")
+                    .append(declaredField.get(object).toString())
+                    .append("</")
                     .append(fieldName).append(">\n");
         }
-        output.append("</").append(typeName).append(">");
+        output
+                .append("</")
+                .append(typeName)
+                .append(">");
         return output.toString();
     }
 

@@ -5,6 +5,7 @@ import shilkin.Exceptions.NoExistsInCollectionException;
 import shilkin.fabrics.AppleGarden;
 import shilkin.fabrics.ElectronicFabric;
 import shilkin.fabrics.FoodFactory;
+import shilkin.interfaces.ShopVisitor;
 import shilkin.items.ElectronicItem;
 import shilkin.items.FoodItem;
 import shilkin.items.ShopItem;
@@ -43,34 +44,30 @@ public class Main {
         RichVisitor richVisitor = new RichVisitor();
         ElectronicAddictedVisitor electronicAddictedVisitor = new ElectronicAddictedVisitor();
         try {
-            imJustLookingVisitor.visitShop(hyperMarket);
-            System.out.println();
-            imJustLookingVisitor.visitShop(mVideo);
-            System.out.println();
-            imJustLookingVisitor.visitShop(spar);
-            System.out.println();
-            imJustLookingVisitor.visitShop(appleMarket);
-            System.out.println();
-
-            richVisitor.visitShop(hyperMarket);
-            System.out.println();
-            richVisitor.visitShop(mVideo);
-            System.out.println();
-            richVisitor.visitShop(spar);
-            System.out.println();
-            richVisitor.visitShop(appleMarket);
-            System.out.println();
-
-            electronicAddictedVisitor.visitShop(hyperMarket);
-            System.out.println();
-            electronicAddictedVisitor.visitShop(mVideo);
-            System.out.println();
-            electronicAddictedVisitor.visitShop(spar);
-            System.out.println();
-            electronicAddictedVisitor.visitShop(appleMarket);
-            System.out.println();
+            System.out.println("В магазины заходит покупатель, который просто смотрит, какой товар есть в магазине.");
+            visitShop(imJustLookingVisitor, hyperMarket, mVideo, spar, appleMarket);
+            System.out.println("В магазины заходит покупатель, который покупает каждый второй товар в магазине.");
+            visitShop(richVisitor, hyperMarket, mVideo, spar, appleMarket);
+            System.out.println("В магазины заходит покупатель, который покупает электронный товар с самой большой потребляемой мощностью.");
+            visitShop(electronicAddictedVisitor, hyperMarket, mVideo, spar, appleMarket);
         } catch (NoElementsInCollectionException | NoExistsInCollectionException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static void visitShop(
+            ShopVisitor shopVisitor,
+            Collection<ShopItem> hyperMarket,
+            Collection<ElectronicItem> mVideo,
+            Collection<FoodItem> spar,
+            Collection<Apple> appleMarket) throws NoExistsInCollectionException, NoElementsInCollectionException {
+        shopVisitor.visitShop(hyperMarket);
+        System.out.println();
+        shopVisitor.visitShop(mVideo);
+        System.out.println();
+        shopVisitor.visitShop(spar);
+        System.out.println();
+        shopVisitor.visitShop(appleMarket);
+        System.out.println();
     }
 }

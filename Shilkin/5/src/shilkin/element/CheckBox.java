@@ -1,4 +1,6 @@
-package shilkin;
+package shilkin.element;
+
+import shilkin.exception.ReadOnlyException;
 
 public class CheckBox extends Rectangle implements Clickable {
 

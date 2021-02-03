@@ -14,6 +14,7 @@ public class Main {
         System.out.println(utils.toDeserializeObject(xmlAndrey, Tutor.class));
         String xmlOleg = utils.toSerializeObject(oleg);
         System.out.println(xmlOleg);
-        System.out.println(utils.toDeserializeObject(xmlOleg, Trainee.class));
+        Trainee trainee = utils.toDeserializeObject(xmlOleg, Trainee.class);
+        System.out.println(trainee.toString());
     }
 }
